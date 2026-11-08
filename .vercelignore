@@ -1,0 +1,10 @@
+.env
+.env.*
+!.env.example
+private-inputs/
+private-outputs/
+node_modules/
+*.log
+
+*.zip
+*.pdf

@@ -1,0 +1,23 @@
+[
+  {"episode":"Episode 1 — The letter","start":0,"end":3,"text":"MARA: You sold our home without telling me?"},
+  {"episode":"Episode 1 — The letter","start":3,"end":8,"text":"ACTION: Mara holds a foreclosure letter. Her brother Leo blocks the doorway."},
+  {"episode":"Episode 1 — The letter","start":8,"end":13,"text":"LEO: I borrowed money for Dad's operation. I thought I could pay it back."},
+  {"episode":"Episode 1 — The letter","start":13,"end":18,"text":"MARA: The hospital said someone already paid. Who took your money?"},
+  {"episode":"Episode 1 — The letter","start":18,"end":23,"text":"ACTION: Leo looks at the signature on the letter. His hand begins to shake."},
+  {"episode":"Episode 1 — The letter","start":23,"end":27,"text":"LEO: Wait. Why does this have your husband's signature?"},
+  {"episode":"Episode 1 — The letter","start":27,"end":32,"text":"ACTION: A key turns in the lock. Mara's husband opens the door."},
+  {"episode":"Episode 1 — The letter","start":32,"end":38,"text":"HUSBAND: I can explain. I bought the debt to save the house."},
+  {"episode":"Episode 1 — The letter","start":38,"end":43,"text":"MARA: Then why did you order us to leave?"},
+  {"episode":"Episode 1 — The letter","start":43,"end":48,"text":"ACTION: He reaches for the letter, but a second envelope falls from his coat."},
+  {"episode":"Episode 2 — The stranger","start":0,"end":3,"text":"STRANGER: Stop the wedding. That man is already married."},
+  {"episode":"Episode 2 — The stranger","start":3,"end":8,"text":"ACTION: The bride Iris lowers her bouquet. Guests turn to the woman at the chapel doors."},
+  {"episode":"Episode 2 — The stranger","start":8,"end":13,"text":"IRIS: Daniel, who is she?"},
+  {"episode":"Episode 2 — The stranger","start":13,"end":18,"text":"DANIEL: My wife died three years ago. I buried her myself."},
+  {"episode":"Episode 2 — The stranger","start":18,"end":23,"text":"ACTION: The stranger lifts a photograph of herself and Daniel."},
+  {"episode":"Episode 2 — The stranger","start":23,"end":27,"text":"STRANGER: Then tell me whose body you buried?"},
+  {"episode":"Episode 2 — The stranger","start":27,"end":32,"text":"ACTION: Daniel steps back, stunned, as the stranger removes her glove."},
+  {"episode":"Episode 2 — The stranger","start":32,"end":38,"text":"DANIEL: You're her twin sister. You promised never to return."},
+  {"episode":"Episode 3 — A quiet day","start":0,"end":10,"text":"ACTION: Two people walk through a garden."},
+  {"episode":"Episode 3 — A quiet day","start":10,"end":20,"text":"ELI: The flowers look nice this year."},
+  {"episode":"Episode 3 — A quiet day","start":20,"end":30,"text":"JUNE: Yes. I watered them yesterday."}
+]

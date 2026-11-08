@@ -1,0 +1,14 @@
+{
+  "name": "kuku-promo-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "22.x" },
+  "scripts": {
+    "dev": "node --env-file-if-exists=.env server.js",
+    "start": "node --env-file-if-exists=.env server.js",
+    "test": "node --test",
+    "build": "node scripts/build.js",
+    "evaluate": "node scripts/evaluate.js"
+  }
+}

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Find, inspect and rank source-grounded microdrama promos.">
+  <title>Promo Lab — Find the moment</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23754ad8'/%3E%3Cpath d='M16 11L29 20L16 29Z' fill='white'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <aside class="rail"><a class="brand" href="/" aria-label="Promo Lab home">p<span>↗</span></a><div class="rail-item active" title="Discovery workspace">▦</div><div class="rail-caption">PROMO LAB</div><span class="rail-bottom">01</span></aside>
+  <main>
+    <header class="topbar"><div class="breadcrumbs">WORKSPACE <span>/</span> <strong>Promo discovery</strong></div><div class="top-right"><span class="status-dot"></span><span id="environment">Local workspace</span><button class="text-button" id="help-button">How it works ↗</button></div></header>
+    <section class="intro"><div><div class="eyebrow">FROM SCREENPLAY TO SHORTLIST</div><h1>Find the moment.<br><em>Leave them wanting more.</em></h1><p>A source-first workbench for the next 20–60 seconds worth watching.</p></div><div class="intro-note"><span class="tiny-label">THE EDITOR’S RULE</span><p>Hook in 3 seconds.<br>Leave a question worth answering.</p><span>One small job per agent. Every decision visible.</span></div></section>
+    <section class="pipeline" aria-label="Agent workflow">
+      <div data-agent="master"><b>01</b><span>Master<small>Coordinate the run</small></span><i></i></div><span class="arrow">→</span>
+      <div data-agent="ingest"><b>02</b><span>Source keeper<small>Preserve the evidence</small></span><i></i></div><span class="arrow">→</span>
+      <div data-agent="scout"><b>03</b><span>Hook scout<small>Discover the moments</small></span><i></i></div><span class="arrow">→</span>
+      <div data-agent="critic"><b>04</b><span>Story critic<small>Challenge each cut</small></span><i></i></div><span class="arrow">→</span>
+      <div data-agent="ranker"><b>05</b><span>Ranker<small>Put the strongest first</small></span><i></i></div>
+    </section>
+    <section class="workbench">
+      <aside class="source-panel panel">
+        <div class="panel-heading"><h2><span class="section-number">01</span> Screenplay</h2><span class="tag">INPUT</span></div>
+        <label class="dropzone" id="dropzone" for="files"><span class="upload-icon">↥</span><strong>Bring the whole story</strong><span>Drop screenplay files or browse</span><small>Kuku TXT · timed TXT · JSON</small></label><input type="file" id="files" accept=".txt,.json" multiple hidden>
+        <div class="source-actions"><button id="folder-button" class="small-button">Import folder</button><button id="sample-button" class="small-button">Try a sample ↗</button></div><input type="file" id="folder" webkitdirectory multiple hidden>
+        <button id="local-pack" class="local-pack" hidden>↳ Load your 50-episode local pack</button>
+        <div id="source-meta" class="source-meta">No screenplay loaded yet</div>
+        <label class="field-label" for="episode-select">SOURCE PREVIEW</label><select id="episode-select" disabled><option>Choose an episode</option></select>
+        <div class="source-preview" id="source-preview"><div class="muted-empty">Your timecoded dialogue and actions will appear here.</div></div>
+        <details class="paste"><summary>Or paste screenplay records</summary><textarea id="paste-input" rows="5" placeholder='[{"episode":"Episode 1","start":0,"end":5,"text":"…"}]' aria-label="Paste JSON or timed text"></textarea><button class="small-button" id="paste-button">Load pasted input</button></details>
+        <div class="run-settings"><label class="field-label" for="mode">ANALYSIS ENGINE</label><select id="mode"><option value="baseline">Offline baseline · free</option><option value="model">Connected model</option></select><p id="model-note">Keyword discovery. No API calls. All picks need an editor.</p><label class="check"><input type="checkbox" id="stitch" disabled> Explore multi-segment promos <span>MODEL</span></label><label id="token-field" hidden class="field-label">WORKSPACE ACCESS TOKEN<input type="password" id="token" autocomplete="off" placeholder="Token stays in this tab"></label></div>
+        <button id="run" class="primary" disabled>Find promos <span>→</span></button><button id="cancel" class="small-button" hidden>Cancel run</button>
+        <div id="notice" role="status" aria-live="polite"></div>
+      </aside>
+      <section class="results-panel panel">
+        <div class="panel-heading"><h2><span class="section-number">02</span> The shortlist</h2><button id="export" class="small-button" disabled>Export run ↓</button></div>
+        <div class="results-summary" id="results-summary"><div><strong>—</strong><span>PROMOS</span></div><div><strong>—</strong><span>EPISODES</span></div><div><strong>20–60<span>s</span></strong><span>CLIP LENGTH</span></div></div>
+        <div class="tabs" role="tablist"><button class="selected" data-tab="shortlist" role="tab" aria-selected="true">Shortlist <span id="short-count">0</span></button><button data-tab="all" role="tab" aria-selected="false">All candidates</button><button data-tab="coverage" role="tab" aria-selected="false">Coverage</button></div>
+        <div id="candidate-list" class="candidate-list"><div class="empty-state"><div class="empty-art"><span>00:03</span><b>▶</b><span>00:60</span></div><h3>Great stories have a moment.</h3><p>Load your screenplay and let the team find it.<br>You make the final editorial call.</p><div class="empty-chips"><span>Evidence, not guesses</span><span>Every cut explained</span></div></div></div>
+        <div class="results-foot">Scores guide editorial review. They do not predict views.</div>
+      </section>
+      <aside class="detail-panel panel"><div class="panel-heading"><h2><span class="section-number">03</span> Inspect the cut</h2><span class="tag">EVIDENCE</span></div><div id="detail" class="detail-content"><div class="detail-empty"><span>⌁</span><h3>No mystery cuts.</h3><p>Select a promo to see its source segments, hook, ending and the reasoning behind its rank.</p></div></div></aside>
+    </section>
+    <section class="trace panel"><button id="trace-toggle" aria-expanded="false"><span><span class="live-dot"></span> Agent activity <span id="trace-count">0 events</span></span><span id="trace-last">Ready when you are</span><b>⌄</b></button><div id="trace-body" hidden><div class="trace-toolbar"><p>Prompts, responses and failures. No API keys are included.</p><button id="export-trace" class="small-button" disabled>Download trace ↓</button></div><div id="trace-events"></div></div></section>
+    <footer>BUILT FOR THE EDITOR IN THE LOOP <span>Promo Lab / v0.1 · Problem 01</span></footer>
+  </main>
+  <dialog id="help"><button id="close-help" class="close" aria-label="Close">×</button><div class="eyebrow">A SMALL, ACCOUNTABLE TEAM</div><h2>Story judgment meets source evidence.</h2><ol><li><strong>Master:</strong> runs a fixed workflow, tracks failures and limits calls.</li><li><strong>Source keeper:</strong> reads exact timestamps and preserves overlapping action, camera and dialogue.</li><li><strong>Hook scout:</strong> proposes up to three continuous clips per episode. Optional assembly combines a small shortlist in model mode.</li><li><strong>Story critic:</strong> compares nearby ending cuts, identifies the question left for the viewer, and checks clarity and emotional stakes.</li><li><strong>Validator + ranker:</strong> reject invented references and bad durations, score the survivors, and remove repetitive clips.</li></ol><p>35% hook + 30% cliffhanger + 25% clarity + 10% emotion. These starting weights reflect the brief; they are not trained on ad performance.</p><p>The free baseline uses keywords and always requires human review. Connect a model through server environment variables. Every run can be exported with its trace and source evidence.</p><p>Imported material stays in memory unless you export it. Model mode sends screenplay excerpts to the configured provider. The local pack is excluded from deployment.</p></dialog>
+  <script type="module" src="/app.js"></script>
+</body></html>

@@ -1,0 +1,11 @@
+import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { runPipeline } from '../lib/pipeline.js';
+const file = process.argv.slice(2).find(arg => !arg.startsWith('--')) || 'private-inputs/show.json';
+const mode = process.argv.includes('--model') ? 'model' : 'baseline';
+const input = JSON.parse(await readFile(file, 'utf8'));
+const report = await runPipeline(input, { mode, stitch: mode === 'model' });
+await mkdir('private-outputs', { recursive: true });
+const output = file === 'public/sample.json' ? `private-outputs/${mode}-sample-run.json` : `private-outputs/${mode}-run.json`;
+await writeFile(output, JSON.stringify(report, null, 2));
+console.log(JSON.stringify(report.summary, null, 2));
+console.log(`Raw output: ${output}`);
