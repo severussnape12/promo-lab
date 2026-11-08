@@ -50,7 +50,9 @@ async function importFiles(files) {
   } catch (e) { notice(`Import failed: ${e.message}`); }
 }
 function updateRun() {
-  $('#run').disabled = busy || !source || ($('#mode').value === 'model' && !status.modelConfigured);
+  const needsToken = $('#mode').value === 'model' && status.tokenRequired;
+  $('#token-field').hidden = !needsToken;
+  $('#run').disabled = busy || !source || ($('#mode').value === 'model' && !status.modelConfigured) || (needsToken && !$('#token').value.trim());
   $('#mode').disabled = busy;
   $('#stitch').disabled = busy || $('#mode').value !== 'model';
   $('#model-note').textContent = $('#mode').value === 'baseline' ? 'Keyword discovery. No API calls. All picks need an editor.' : status.modelConfigured ? `Using ${status.model}. Sends screenplay excerpts to your configured provider.` : 'Set MODEL_API_KEY and MODEL_NAME in .env, then restart the server.';
@@ -76,7 +78,7 @@ async function run() {
   notice('Master agent is coordinating the run. Follow the activity log below.');
   try {
     const headers = { 'Content-Type':'application/json' };
-    if ($('#token').value) headers.Authorization = `Bearer ${$('#token').value}`;
+    if ($('#mode').value === 'model' && $('#token').value) headers.Authorization = `Bearer ${$('#token').value}`;
     const response = await fetch('/api/run', { method:'POST', headers, body:JSON.stringify({ records:source.records, mode:$('#mode').value, stitch:$('#stitch').checked }), signal:controller.signal });
     if (!response.ok) throw new Error((await response.text()).slice(0,1000));
     const reader = response.body.getReader(), decoder = new TextDecoder(); let pending = '';
@@ -141,7 +143,7 @@ $('#episode-select').addEventListener('change',renderSource);
 $('#sample-button').addEventListener('click', async () => { try { load(await (await fetch('/sample.json')).json(),'Synthetic sample · not Kuku content'); } catch(e) { notice(e.message); } });
 $('#local-pack').addEventListener('click', async () => { try { const r = await fetch('/api/local-pack'); if (!r.ok) throw new Error('Local pack unavailable. Use Import folder.'); load(await r.json(),'Local screenplay pack'); } catch(e) { notice(e.message); } });
 $('#paste-button').addEventListener('click', () => { try { const text = $('#paste-input').value.trim(); load(/^[\[{]/.test(text) && !/^\[\d\d:/.test(text) ? JSON.parse(text) : parseText(text),'Pasted records'); } catch(e) { notice(e.message); } });
-$('#mode').addEventListener('change',updateRun); $('#run').addEventListener('click',run); $('#cancel').addEventListener('click',() => controller?.abort());
+$('#token').addEventListener('input',updateRun); $('#mode').addEventListener('change',updateRun); $('#run').addEventListener('click',run); $('#cancel').addEventListener('click',() => controller?.abort());
 $('#export').addEventListener('click', () => download({ ...report, sourceLabel, editorialFeedback:feedback },`promo-lab-${report.runId}.json`));
 $('#export-trace').addEventListener('click', () => download(events,`promo-lab-trace-${Date.now()}.json`));
 document.querySelectorAll('[data-tab]').forEach(el => el.addEventListener('click', () => { tab = el.dataset.tab; document.querySelectorAll('[data-tab]').forEach(t => { t.classList.toggle('selected', t === el); t.setAttribute('aria-selected',String(t === el)); }); renderList(); }));
